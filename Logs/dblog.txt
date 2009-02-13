@@ -1,0 +1,53 @@
+DBMan : Connected to localhost
+DBMan : Connected to localhost
+DBMan : Connected to localhost
+DBMan : Connected to localhost
+DBMan : Connected to localhost
+DBMan : Connected to localhost
+DBMan : Connected to localhost
+DBMan : Updating test2 update test2 set id=4,roll=5
+DBMan : Connected to localhost
+DBMan : Updating test2 update test2 set id=4,roll=5
+DBMan : Connected to localhost
+DBMan : Updating test2 update test2 set id=4,roll=5
+DBMan : Connected to localhost
+DBMan : Updating test2 update test2 set id=4,roll=5
+DBMan : Connected to localhost
+DBMan : Updating test2 update test2 set id=4,roll=5
+DBMan : Connected to localhost
+DBMan : Updating test2 update test2 set id=4,roll=5
+DBMan : Connected to localhost
+DBMan : Connected to localhost
+DBMan : Connected to localhost
+DBMan : Connected to localhost
+DBMan : Connected to localhost
+DBMan : Connected to localhost
+DBMan : Connected to localhost
+DBMan : Connected to localhost
+DBMan : Connected to localhost
+DBMan : Connected to localhost
+DBMan : Inserting to  test2:insert into test2(id,roll) values(100,150)
+DBMan : Connected to localhost
+DBMan : Inserting to  test2:insert into test2(id,roll) values(100,150)
+DBMan : Updating test2:update test2 set id=101,roll=5
+DBMan : Connected to localhost
+DBMan : Inserting to  test2:insert into test2(id,roll) values(100,150)
+DBMan : Updating test2:update test2 set id=101,roll=5
+DBMan : Connected to localhost
+DBMan : Inserting to  test2:insert into test2(id,roll) values(100,150)
+DBMan : Updating test2:update test2 set id=101,roll=5
+DBMan : Connected to localhost
+DBMan : Inserting to  test2:insert into test2(id,roll) values(100,150)
+DBMan : Updating test2:update test2 set id=101,roll=5
+DBMan : Connected to localhost
+DBMan : Inserting to  test2:insert into test2(id,roll) values(100,150)
+DBMan : Updating test2:update test2 set id=101,roll=5 
+DBMan : Connected to localhost
+DBMan : Inserting to  test2:insert into test2(id,roll) values(100,150)
+DBMan : Updating test2:update test2 set id=101,roll=5 where haha>10
+DBMan : Connected to localhost
+DBMan : Inserting to  test2:insert into test2(id,roll) values(100,150)
+DBMan : Updating test2:update test2 set id=101,roll=5 where haha>10
+DBMan : Connected to localhost
+DBMan : Inserting to  test2:insert into test2(id,roll) values(100,150)
+DBMan : Updating test2:update test2 set id=101,roll=5 where haha>10
