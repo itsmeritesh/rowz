@@ -11,12 +11,11 @@ class dbman{
  private $dbname;
  private $dblog;
 
-function __construct($server,$user,$pass,$db) {
+function __construct($server,$user,$pass) {
 	//print "Initialized";
         $this->servername=$server;
 	$this->username=$user;
 	$this->password=$pass;
-	$this->dbname=$db;
 	$this->dblog=new logger(2);
 	}
 
