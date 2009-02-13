@@ -31,16 +31,7 @@
 			document.rowzloginform.submit();
 		}
 
-		function checkKeycode(e) 
-		        {
-		          var keycode;
-		          if (window.event) keycode = window.event.keyCode;
-		             else if (e) keycode = e.which;
-		          if(keycode == 13)
-		             {
-		               loginAction();
-		            }
-		         }
+		
 
 	 
 

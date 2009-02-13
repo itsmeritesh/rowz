@@ -20,5 +20,4 @@ function log_write($text){
  }
 
 }
-
 ?>

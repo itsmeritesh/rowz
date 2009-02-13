@@ -1,6 +1,6 @@
- <?php
+<?php
 
-include 'logger.php';
+include_once 'logger.php';
 
 class dbman{
 
@@ -12,18 +12,15 @@ class dbman{
  private $dblog;
 
 function __construct($server,$user,$pass) {
-	//print "Initialized";
         $this->servername=$server;
 	$this->username=$user;
 	$this->password=$pass;
-	$this->dblog=new logger(2);
+	//$this->dblog=new logger(2);
 	}
 
 
-function __destruct() {
-	
+function __destruct() {	
        mysql_close($this->connection);
-       print "destroyed";
    }
 
 function make_connect($db){
@@ -32,18 +29,18 @@ $con = mysql_connect($this->servername,$this->username,$this->password);
 if (!$con)
   {
     die('Could not connect: ' . mysql_error());
-    $this->dblog->log_write(" Error Connection failed " . mysql_error());
+   // $this->dblog->log_write(" Error Connection failed " . mysql_error());
   }
 else {
 $this->connection=$con;
 $this->dbname=$db;
 mysql_select_db($this->dbname);
-$this->dblog->log_write(" Connected to " . $this->servername );
+//$this->dblog->log_write(" Connected to " . $this->servername );
     }
 
 }
 
-/* generic selects,updates,truncates and deletes*/
+
 
 function exec_query($text){
 
@@ -52,7 +49,7 @@ function exec_query($text){
    
 }
 
-/* Updates tablename with associate array valueset */
+
 
 function exec_update($tablename,$valueset,$condition) {
 $count=0;
@@ -76,12 +73,12 @@ else{
 
 $update_query="update ".$tablename." set ".$updatestring." ".$condition ;
 }
-$this->dblog->log_write(" Updating ".$tablename.":".$update_query );
+//$this->dblog->log_write(" Updating ".$tablename.":".$update_query );
 mysql_query($update_query);
 //echo $update_query;
 }
 
-/*Inserts both named and unnamed unnamed type=1, unnamed type=2*/
+
 
 function exec_insert($tablename,$type,$valueset){
 
@@ -110,14 +107,10 @@ if($type==2){
 $query="insert into ".$tablename."(".$cols.") values(".$values.")";
 }
 //echo $query;
-$this->dblog->log_write(" Inserting to  ".$tablename.":".$query );
+//$this->dblog->log_write(" Inserting to  ".$tablename.":".$query );
 mysql_query($query);
-
+}
 }
 
-
-
-
-}
-
+$dbcon = new dbman("localhost","ner","ner");
 ?>

@@ -1,7 +1,16 @@
 <?php
-$searchQuery = rawurlencode(stripslashes($_REQUEST['query']));
+ include_once "auth.php";
+ include_once "dbman.php";
+ $inputQuery = $_REQUEST['query'];
+ $dbcon->make_connect("rowz");
+ if($inputQuery!=null && !Empty($inputQuery))
+   {
+	$dbcon->exec_query("insert into queries values('".$inputQuery."',NOW(),'".$_SESSION['rowzusername']."')");
+   }
+
+$searchQuery = rawurlencode(stripslashes($inputQuery));
 $count = $_REQUEST['count'];
-$Appid = "";   ///////    Add your Appid here, its that easy
+$Appid = "7kw4a.zIkY0haAtP0OuTRNKIdMzYNLljVaxU";   ///////    Add your Appid here, its that easy
 $Site="";   /////// Make this empty if you are building a generic web search, add your URL for site search
 
 if(!empty($searchQuery))
@@ -26,6 +35,7 @@ if(!empty($searchQuery))
 	<script language="javascript" src="js/default.js"></script>
 	<link href="css/default.css" rel="stylesheet" type="text/css" />
         <script language="javascript">
+       document.onkeydown = checkKeycode
 	function validateSearch()
 	{
 	  if(isEmpty(document.getElementById("query")))
@@ -35,6 +45,18 @@ if(!empty($searchQuery))
 			}
 	  document.searchform.submit();
 	}
+
+      function checkKeycode(e) 
+        {
+          var keycode;
+         if (window.event) keycode = window.event.keyCode;
+          else if (e) keycode = e.which;
+         if(keycode == 13)
+            {
+              validateSearch();
+            }
+         }
+
 	
 	 </script>
  </head>
@@ -44,7 +66,7 @@ if(!empty($searchQuery))
 	    <div style="width:100%" >
 		<form name="searchform" action="search.php" method="POST" style="margin:0px">
 		    Rowz Search <input type="text" size="50" style="" name="query" id="query"></input>
-		    <input type="button" value="Search" onClick=""> 
+		    <input type="button" value="Search" onClick="validateSearch()"> 
 	       </form> 
 	    </div>
     <hr color="#f0f0f0">
