@@ -16,4 +16,3 @@
 	$_SESSION['rowzusername'] = $username;
    }
 ?>
-

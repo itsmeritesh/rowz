@@ -35,5 +35,12 @@ create table queries(
 );  
 
 
+create table shouts(
+data TEXT,
+ user_id varchar(50),
+ entry_date DATETIME
+);
+
+
 
 

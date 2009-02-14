@@ -4,22 +4,25 @@
  include_once "auth.php";
  include_once "dbman.php";
 
-
- 
   $title = $_REQUEST['title'];
   $data = $_REQUEST['data'];
-  $qflag =$_REQUEST['qflag'];
+  $question = $_REQUEST['question'];
+  $con = new dbman("localhost","ner","ner");
+  $con->make_connect("rowz");	
+ $con->log("inserting : ".$question );
 
+ 
  if(!empty($title)  && !empty($data))
  {
-	$dbcon->make_connect("rowz");	
-	$query= " insert into rowz_store values (NULL,'".$_SESSION['rowzusername']."',NOW(),'".$title."','".$data."',".$qflag.")";
-	echo $query;
-	$dbcon->exec_query($query);
+
+	$query= " insert into rowz_store values (NULL,'".$_SESSION['rowzusername']."',NOW(),'".$title."','".$data."',0)";	
+	$con->exec_query($query);
+	echo 'Added Success';
  }	
-	
-	
-	
+
+
 	//header("location:entity.php?EntityTypeID=".$EntityTypeID."&EntityInstanceID=".$EntityInstanceID);
-   //testurl: http://localhost/rowz/addtorepo.php?title=thisisatesttitle&data=sampledata&qflag=0
+   //testurl for repo additions: http://localhost/rowz/addtorepo.php?title=thisisatesttitle&data=sampledata&qflag=0
+   //testurl for question addition : http://localhost/rowz/addtorepo.php?question=thisisasamplequestion
 ?>
+

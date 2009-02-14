@@ -2,7 +2,20 @@
  include_once "auth.php";
  include_once "dbman.php";
  $inputQuery = $_REQUEST['query'];
- $dbcon->make_connect("rowz");
+//$dbcon = new dbman("localhost","ner","ner");
+  $dbcon->make_connect("rowz");
+
+//see if the query is an @ then add it to the shout box
+ $tocheck = trim($inputQuery);
+ if($tocheck[0] == '@')
+  {	
+    $dbcon->exec_query("insert into shouts values ('".substr($tocheck,1)."','".$_SESSION['rowzusername']."',NOW())");
+   header('location:dash.php');
+   } 
+
+
+
+
  if($inputQuery!=null && !Empty($inputQuery))
    {
 	$dbcon->exec_query("insert into queries values('".$inputQuery."',NOW(),'".$_SESSION['rowzusername']."')");
@@ -33,9 +46,11 @@ if(!empty($searchQuery))
  <head>
      <title>Rowz Search - </title>
 	<script language="javascript" src="js/default.js"></script>
+	<script type="text/javascript" src="js/mootools.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
 	<link href="css/default.css" rel="stylesheet" type="text/css" />
         <script language="javascript">
-       document.onkeydown = checkKeycode
+ 
 	function validateSearch()
 	{
 	  if(isEmpty(document.getElementById("query")))
@@ -46,22 +61,27 @@ if(!empty($searchQuery))
 	  document.searchform.submit();
 	}
 
-      function checkKeycode(e) 
+  function checkKeycode(e) 
         {
           var keycode;
          if (window.event) keycode = window.event.keyCode;
           else if (e) keycode = e.which;
          if(keycode == 13)
             {
-              validateSearch();
+              //validateSearch();
             }
          }
+
+	   document.onkeydown = checkKeycode
+
 
 	
 	 </script>
  </head>
  <body >
-    <div style="width:100%" >
+ <div id='mainbody' style="background-color:#FFFFFF;width:100%;height:100%">
+
+
 
 	    <div style="width:100%"  valign="top">
 
@@ -71,6 +91,7 @@ if(!empty($searchQuery))
 		   		<img src="rowzfinal.JPG" border="0">
 			<td valign="top"><input type="text" size="50" style="" name="query" id="query"></input><br><font color="lightgray" style="font-size:110%"><i>Sample query:  java.util.date formatting for dd/mm/yyyy</i> </font>
 	<td valign="top">		    <input type="button" value="Search" onClick="validateSearch()"> 
+	<td valign="top" align="right" style="width:90%"><a href="logout.php">Logout</a>
 		  <tr><td valign="top"><td>
 		</table>
 	       </form> 
@@ -93,12 +114,12 @@ if(!empty($searchQuery))
   <span style="color:#5195CE"><?=$result->dispurl?></span>
   <br>
    <!-- start of the actions section -->
-  <div id="actions"> 
+  <div id="linkplace"> 
      &nbsp; &nbsp;&nbsp;
       <a href="#" style="color:#5BC236">Add to repository</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <a href="#" style="color:#5BC236">Add a comment</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <a href="#" style="color:#5BC236">Favorite this Site</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="#" style="color:#5BC236">Post as Question</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#" style="color:#5BC236" onmousedown="pull_box('<?=strip_tags($result->title)?>','repo')">Post as Question</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </div>
 <?php
 }
@@ -125,5 +146,9 @@ if(!empty($searchQuery))
  }
 ?>
    </div>
+ <div style="z-index:1;background-color:lightblue;width:500;height:200px;position:absolute;top:200px;left:250px;opacity:0" id="overdiv">this is it</div>
  </body>
 </html>
+<?php 
+
+?>

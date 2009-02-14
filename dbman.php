@@ -81,7 +81,16 @@ mysql_query($update_query);
 //echo $update_query;
 }
 
+function log($message)
+ {
+	$this->dblog->log_write($message );
+ }
 
+function close()
+ {
+ if($this->connection !=null)
+       mysql_close($this->connection);
+ }
 
 function exec_insert($tablename,$type,$valueset){
 
@@ -115,5 +124,5 @@ mysql_query($query);
 }
 }
 
-$dbcon = new dbman("localhost","ner","ner");
+  $dbcon= new dbman("localhost","ner","ner");
 ?>
