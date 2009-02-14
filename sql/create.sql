@@ -17,8 +17,10 @@ create table rowz_store (
  sid int primary key AUTO_INCREMENT ,
  user_id varchar(50),
  entry_date DATETIME,
+  clickurl TEXT,
  title text,
  data TEXT,
+ dispurl TEXT,
  q_type int);
 
 drop table rowz_annotations;
@@ -33,6 +35,8 @@ create table queries(
  entry_date DATETIME,
  uid varchar(50)
 );  
+
+CREATE FULLTEXT INDEX myindex ON rowz_store (data,title);
 
 
 create table shouts(

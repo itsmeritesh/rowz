@@ -97,8 +97,34 @@ if(!empty($searchQuery))
 	       </form> 
 	    </div>
     <hr color="#f0f0f0">
+	<font style="color:#d0d0d0;font-size:120%" >From the Repo</font>
+    <hr color="#f0f0f0">
+  <div style="background-color:#FFF099;width:100%">
+    <?php
+	$repoquery="select sid,title,data,dispurl,name from rowz_store,rowz_users where user_id = uid and match(data,title) against ('".$inputQuery."')";
+	$reporesult = $dbcon->exec_query($repoquery);
+	while ($row = mysql_fetch_array($reporesult, MYSQL_NUM))
+	{
+	?>	  
+	<div style="padding:10px">
+	   <a style="color:#005DB3" href="details.php?sid=<?=$row[0]?>"><?=$row[1]?></a><br />
+	   <span style="color:gray"> <?=$row[2]?></span><br>
+		<table style="width:100%">
+		<tr><td align="left"><span style="color:#5195CE" align=""><?=$row[3]?></span>
+        		<td align="right">Added By: <?=$row[4]?>
+		</table>
+  <br>
+	</div>
+	<?php
+	}
 
+	mysql_free_result($reporesult);
+    ?>
+ </div>
 
+    <hr color="#f0f0f0">
+	<font style="color:#d0d0d0;font-size:120%" >From the Web</font>
+    <hr color="#f0f0f0">
 
     <!-- start of BOSS results  -->
 <table style="width:100%">
@@ -116,10 +142,12 @@ if(!empty($searchQuery))
    <!-- start of the actions section -->
   <div id="linkplace"> 
      &nbsp; &nbsp;&nbsp;
-      <a href="#" style="color:#5BC236">Add to repository</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="#" style="color:#5BC236">Add a comment</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#" style="color:#5BC236" onmousedown=" pull_addrepo('<?=cleanString($result->title)?>','<?=cleanString($result->abstract)?>' , '<?=cleanString($result->dispurl)?> ' )">Add to repository</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#" style="color:#5BC236" 
+    onmousedown=" pull_comments_search('<?=cleanString($result->title)?>','<?=cleanString($result->abstract)?>' , '<?=cleanString($result->dispurl)?> ' )">
+      Add a comment</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <a href="#" style="color:#5BC236">Favorite this Site</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="#" style="color:#5BC236" onmousedown="pull_box('<?=strip_tags($result->title)?>','repo')">Post as Question</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#" style="color:#5BC236" onmousedown="pull_box('<?=cleanString($result->title)?>')">Post as Question</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </div>
 <?php
 }
@@ -150,5 +178,10 @@ if(!empty($searchQuery))
  </body>
 </html>
 <?php 
-
+  function cleanString($input)
+   {
+	$output = strip_tags($input);
+	return str_replace("'","",$output);
+	
+   }
 ?>

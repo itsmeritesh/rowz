@@ -70,6 +70,7 @@ function makeRequest(url) {
         if (http_request.readyState == 4) {
             if (http_request.status == 200) {
 		document.getElementById("overdiv").innerHTML = http_request.responseText;
+		call_hide_html();
             } else {
                 alert('There was a problem with the request.');
             }
