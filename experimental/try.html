@@ -1,0 +1,62 @@
+<html>
+<head>
+<script type="text/javascript" src="./mootools.js"></script>
+<script type="text/javascript">
+
+function pull_box(type){
+
+new Fx.Tween('overdiv').start('opacity', 0, 1);
+new Fx.Tween('mainbody').start('opacity', 1, 0.5);
+new Request.HTML({
+	url: 'gethtml.php?type='+type,
+	method: 'get',
+	update: 'overdiv',
+	//evalScripts: true,
+	//onComplete: function(){console.log('ajax complete!')}
+}).send();
+
+}
+
+function call_hide(what){
+
+if(what==1){
+
+new Fx.Tween('overdiv').start('opacity', 1, 0);
+new Fx.Tween('mainbody').start('opacity', 0.5, 1);
+}
+
+}
+
+function call_hide_html(){
+
+call_hide(1);
+
+}
+
+
+function send_question(){
+
+var question=document.getElementById('question').value;
+new Request.HTML({
+	url: 'addtorepo.php?question='+question,
+	method: 'get',
+	update: 'overdiv',
+	//evalScripts: true,
+	//onComplete: function(){console.log('ajax complete!')}
+}).send();
+
+}
+</script>
+
+</head>
+<body>
+<div id='mainbody' style="background-color:lightgray;width:100%;height:100%">
+<input type="button" value="click me" onclick="pull_box('repo')"/>
+</div>
+<div style="z-index:1;background-color:lightblue;width:500;height:200px;position:absolute;top:200;left:250;opacity:0" id="overdiv">this is it</div>
+
+
+</body>
+</html>
+
+
