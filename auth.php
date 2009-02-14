@@ -3,7 +3,7 @@
 
   if(!isset($_COOKIE["rowzauthenticationcookie"]))
    {
-	location('header:login.php');
+	header('location:login.php');
 	//after authenticating user	
    }
  else

@@ -63,10 +63,16 @@ if(!empty($searchQuery))
  <body >
     <div style="width:100%" >
 
-	    <div style="width:100%" >
+	    <div style="width:100%"  valign="top">
+
 		<form name="searchform" action="search.php" method="POST" style="margin:0px">
-		    Rowz Search <input type="text" size="50" style="" name="query" id="query"></input>
-		    <input type="button" value="Search" onClick="validateSearch()"> 
+		<table >
+		<tr><td valign="top" rowspan="2">
+		   		<img src="rowzfinal.JPG" border="0">
+			<td valign="top"><input type="text" size="50" style="" name="query" id="query"></input><br><font color="lightgray" style="font-size:110%"><i>Sample query:  java.util.date formatting for dd/mm/yyyy</i> </font>
+	<td valign="top">		    <input type="button" value="Search" onClick="validateSearch()"> 
+		  <tr><td valign="top"><td>
+		</table>
 	       </form> 
 	    </div>
     <hr color="#f0f0f0">
@@ -74,22 +80,36 @@ if(!empty($searchQuery))
 
 
     <!-- start of BOSS results  -->
+<table style="width:100%">
  <?php
 if(!empty($searchQuery))
   {
    foreach ($results->resultset_web->result as $result) {
 ?>
- <b><a href=" <?=$result->clickurl?>" target="_blank" style="color:#005DB3"> 
+ 
+<tr><td style="padding:10px"> <b><a href=" <?=$result->clickurl?>" target="_blank" style="color:#005DB3"> 
    <?=$result->title?></a></b><br>
   <span style="color:gray"> <?=$result->abstract?></span><br>
   <span style="color:#5195CE"><?=$result->dispurl?></span>
-  <br><br>
+  <br>
+   <!-- start of the actions section -->
+  <div id="actions"> 
+     &nbsp; &nbsp;&nbsp;
+      <a href="#" style="color:#5BC236">Add to repository</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#" style="color:#5BC236">Add a comment</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#" style="color:#5BC236">Favorite this Site</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#" style="color:#5BC236">Post as Question</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </div>
 <?php
 }
+
  if(count($results->resultset_web->result)==0)
    echo ' No results found';
 }
+?>
 
+</table>
+<?php
 if(!empty($searchQuery))
  {
   $nextpage=$results->nextpage;

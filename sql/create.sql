@@ -12,15 +12,19 @@ create table rowz_users (
   password varchar(100),
   gid varchar(50));
 
+drop table rowz_store;
 create table rowz_store (
  sid int primary key AUTO_INCREMENT ,
  user_id varchar(50),
  entry_date DATETIME,
- Data TEXT,
+ title text,
+ data TEXT,
  q_type int);
 
+drop table rowz_annotations;
 create table rowz_annotations (
   data TEXT,
+  user_id varchar(50),
   entry_date DATETIME,
   store_id int);
 
@@ -29,6 +33,7 @@ create table queries(
  entry_date DATETIME,
  uid varchar(50)
 );  
+
 
 
 

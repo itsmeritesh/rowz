@@ -25,10 +25,13 @@
      $username = $_REQUEST['username'];
      $password = $_REQUEST['password'];
  
-   //write authentication code
-   $cookievalue =   encryptUsername($username);
-  if(!isset($_COOKIE["rowzauthenticationcookie"]))
+     if(!empty($username) && !empty($password))
+     {
+      //write authentication code
+      $cookievalue =   encryptUsername($username);
       setcookie("rowzauthenticationcookie",$cookievalue, time()+3600);
+      header('location:./dash.php');
+     }
    }
 
 ?>  

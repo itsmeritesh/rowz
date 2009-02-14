@@ -15,11 +15,12 @@ function __construct($server,$user,$pass) {
         $this->servername=$server;
 	$this->username=$user;
 	$this->password=$pass;
-	//$this->dblog=new logger(2);
+	$this->dblog=new logger(2);
 	}
 
 
 function __destruct() {	
+    if($this->connection !=null)
        mysql_close($this->connection);
    }
 
@@ -45,6 +46,8 @@ mysql_select_db($this->dbname);
 function exec_query($text){
 
    $result = mysql_query($text);
+   $this->dblog->log_write(" Executed Query :" . $text);
+   $this->dblog->log_write(" Query Error :" . mysql_error());
    return $result;
    
 }
@@ -73,7 +76,7 @@ else{
 
 $update_query="update ".$tablename." set ".$updatestring." ".$condition ;
 }
-//$this->dblog->log_write(" Updating ".$tablename.":".$update_query );
+$this->dblog->log_write(" Updating ".$tablename.":".$update_query );
 mysql_query($update_query);
 //echo $update_query;
 }
