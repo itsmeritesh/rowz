@@ -29,7 +29,7 @@
      {
       //write authentication code
       $cookievalue =   encryptUsername($username);
-      setcookie("rowzauthenticationcookie",$cookievalue, time()+3600);
+      setcookie("rowzauthenticationcookie",$cookievalue, time()+360000);
       header('location:./dash.php');
      }
    }
@@ -55,18 +55,8 @@
 	  document.searchform.submit();
 	}
 
-  function checkKeycode(e) 
-        {
-          var keycode;
-         if (window.event) keycode = window.event.keyCode;
-          else if (e) keycode = e.which;
-         if(keycode == 13)
-            {
-              //validateSearch();
-            }
-         }
-
-	   document.onkeydown = checkKeycode
+ 
+	  
 
 
 	
@@ -81,7 +71,23 @@
 			
 		<img src="rowzfinal.JPG" border="0">
 		<br>
-		<table style="width:100%"><tr rowspan="2"><td style="width:75%"></td><td style="width:75%">
+		<table style="width:100%"><tr rowspan="2"><td style="width:75%">
+
+<br>
+<br>
+<div>
+<img src="./Question.png" border="0" />&nbsp;&nbsp; <b>Ask Questions based on your search results</b> 
+</div>
+<br>
+<div>
+<img src="./Entry.png" border="0" />&nbsp;&nbsp; <b>Save your search queries forever, and share your results with your team</b>
+</div>
+<br>
+<div>
+<img src="./Annotation.png" border="0" />&nbsp;&nbsp; <b>View and add comments to the questions your team mates pose</b> 
+</div>
+
+</td><td style="width:75%">
 		<form  name="rowzloginform" action=""  method="POST">
 	 <table style="background-color:#f0f0f0;">
 	<tr><td colspan="2" align="center" style="background-color:lightgray" align="center"> Existing Users    
@@ -95,13 +101,14 @@
 	</tr>
 	<td style="width:75%"></td><td style="width:75%">
 	<br><br><br>
-		<form  name="signupform" action=""  method="POST">
+		<form  name="signupform" action="signup.php"  method="POST">
 	 <table style="background-color:#f0f0f0;">
 	<tr><td colspan="2" align="center" style="background-color:lightgray" align="center"> New Users Signup    
-  	<tr><td align="right">	Username <td  align="left"><input id="susername" type="text"  name="username"></input>
-	<tr><td align="right">	Password <td align="left"> <input id="spassword" type="password" name="password"></input>
-	<tr><td align="right">	Full Name <td align="left"> <input id="sfullname" type="text" name="fullname"></input>
+  	<tr><td align="right">	Username <td  align="left"><input id="susername" type="text"  name="susername"></input>
+	<tr><td align="right">	Password <td align="left"> <input id="spassword" type="password" name="spassword"></input>
+	<tr><td align="right">	Full Name <td align="left"> <input id="sfullname" type="text" name="sfullname"></input>
 	<tr><td colspan="2"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" onClick="signupaction()" value="Sign Me Up"></input>
+	<tr><td colspan="2" align="center"> <i>Note: You will be added to the default group. Creation of groups will be done shortly :)</i>
  	</table>
 	</form>
 	

@@ -6,20 +6,24 @@
  
   $sid = $_REQUEST['sid'];
   $comment = $_REQUEST['comment'];
+  $from = $_REQUEST['from'];
 
 
-  $dbcon->make_connect("rowz");	
+
  if(!empty($sid)  && !empty($comment))
  {
 	
-	$query= " insert into rowz_annotations values ('".$data."','".$_SESSION['rowzusername']."',NOW(),".$sid.")";
-	echo $query;
+	$query= " insert into rowz_annotations values ('".$comment."','".$_SESSION['rowzusername']."',NOW(),".$sid.")";
 	$dbcon->exec_query($query);
-	echo "Success<br><input type='button' onClick='call_hide(1)' value='Done'>";
+	if($from != null)
+	$redirecturl = "location:details.php?entry=".$_REQUEST['type']."&sid=".$sid;
+	header($redirecturl);
+	//echo $redirecturl;
+	//echo "Success<br><input type='button' onClick='call_hide(1)' value='Done'>";
  }	
 
 
-if(empty($sid))
+if(empty($sid) && $from==null)
  {
 	  $title = $_REQUEST['title'];
 	  $data = $_REQUEST['data'];

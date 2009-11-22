@@ -125,4 +125,5 @@ mysql_query($query);
 }
 
   $dbcon= new dbman("localhost","ner","ner");
+  $dbcon->make_connect("rowzdb");
 ?>

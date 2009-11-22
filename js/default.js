@@ -31,6 +31,27 @@
 			document.rowzloginform.submit();
 		}
 
+function signupaction()
+		{
+			if(isEmpty(document.getElementById("susername")))
+			{
+				alert("You did not provide your Username");
+				return;
+			}
+			if(isEmpty(document.getElementById("spassword")))
+			{
+				alert("You did not provide your Password");
+				return;
+			}
+			if(isEmpty(document.getElementById("sfullname")))
+			{
+				alert("You did not provide your Full Name");
+				return;
+			}
+
+			document.signupform.submit();
+		}
+
 function makeRequest(url) {
         var httpRequest;
 

@@ -25,7 +25,7 @@ new Fx.Tween('mainbody').start('opacity', 1, 0.5);
 
 
 
-function pull_comments_search(clickurl,title, data,dispurl)
+function pull_comments_search(title, data,dispurl)
  {
 	var chtml1="<table style='position:relative;left:40'><tr><td>Add a comment <br><textarea name='comment' id='comment' rows=4 cols=50></textarea></td></tr><tr><td><input type='button' value='Add Comment' onclick='send_comment()'/>&nbsp;&nbsp;<input type='button' value='Cancel' onclick='call_hide(1)'/>";
     

@@ -3,7 +3,7 @@
  include_once "dbman.php";
  $inputQuery = $_REQUEST['query'];
 //$dbcon = new dbman("localhost","ner","ner");
-  $dbcon->make_connect("rowz");
+
 
 //see if the query is an @ then add it to the shout box
  $tocheck = trim($inputQuery);
@@ -45,6 +45,7 @@ if(!empty($searchQuery))
 <html>
  <head>
      <title>Rowz Search - </title>
+		<link rel="search" type="application/opensearchdescription+xml" title="Rowz" href="http://riteshnayak.com/rowz/ffplugin.xml">
 	<script language="javascript" src="js/default.js"></script>
 	<script type="text/javascript" src="js/mootools.js"></script>
 		<script type="text/javascript" src="js/common.js"></script>
@@ -88,21 +89,25 @@ if(!empty($searchQuery))
 		<form name="searchform" action="search.php" method="POST" style="margin:0px">
 		<table >
 		<tr><td valign="top" rowspan="2">
-		   		<img src="rowzfinal.JPG" border="0">
-			<td valign="top"><input type="text" size="50" style="" name="query" id="query"></input><br><font color="lightgray" style="font-size:110%"><i>Sample query:  java.util.date formatting for dd/mm/yyyy</i> </font>
+		   		<a href="dash.php" style="text-decoration:none"><img src="rowzfinal.JPG" border="0"></a>
+			<td valign="top"><input type="text" size="50" style="" name="query" id="query"></input><br><font color="lightgray" style="font-size:110%"><i>Sample query:  php cache or networkx python </i> </font>
 	<td valign="top">		    <input type="button" value="Search" onClick="validateSearch()"> 
 	<td valign="top" align="right" style="width:90%"><a href="logout.php">Logout</a>
 		  <tr><td valign="top"><td>
 		</table>
 	       </form> 
 	    </div>
+ <?php
+	$repoquery="select sid,title,data,dispurl,name from rowz_store,rowz_users where user_id = uid and match(data,title) against ('".$inputQuery."')";
+	$reporesult = $dbcon->exec_query($repoquery);
+	if(mysql_num_rows($reporesult)>0){
+  ?>
     <hr color="#f0f0f0">
 	<font style="color:#d0d0d0;font-size:120%" >From the Repo</font>
     <hr color="#f0f0f0">
-  <div style="background-color:#FFF099;width:100%">
-    <?php
-	$repoquery="select sid,title,data,dispurl,name from rowz_store,rowz_users where user_id = uid and match(data,title) against ('".$inputQuery."')";
-	$reporesult = $dbcon->exec_query($repoquery);
+  <div style="background-color:#FFF2CC;width:100%">
+   <?php
+	}
 	while ($row = mysql_fetch_array($reporesult, MYSQL_NUM))
 	{
 	?>	  
@@ -167,7 +172,7 @@ if(!empty($searchQuery))
 ?>
 
  <br><div style="width:90%;" align="center"> 
-       <a style="color:brown;margin:5px" href="ss.php?query=<?=$searchQuery?>&count=<?=$count?> "><b> Next Results >>> </b></a>
+       <a style="color:brown;margin:5px" href="search.php?query=<?=$searchQuery?>&count=<?=$count?> "><b> Next Results >>> </b></a>
      </div>
 <?php
     }
@@ -181,6 +186,7 @@ if(!empty($searchQuery))
   function cleanString($input)
    {
 	$output = strip_tags($input);
+	$output=str_replace("\"","",$output);
 	return str_replace("'","",$output);
 	
    }
